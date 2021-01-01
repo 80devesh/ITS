@@ -1,0 +1,33 @@
+<% content_for(:title, "ITS") %>
+
+<% if user_signed_in? %>
+
+	<h1>Listing <%= pluralize(@equipments.length, "equipment", plural: "equipments") %></h1>
+	<%= link_to "Add Equipment", new_equipment_path %>
+
+	<table>
+		<thead>
+			<td>Equipment_Name</td>
+			<td>Equipment_Number</td>
+			<td>Actions</td>
+		</thead>
+
+		<tbody>
+			<% @equipments.each do |equipment| %>
+			<tr>
+				<td><%= equipment.name %></td>
+				<td><%= equipment.e_number %></td>
+				<td>
+					<a href="equipments/<%= equipment.id %>">See Details</a> |
+					<a href="equipments/<%= equipment.id %>/edit">Edit Details</a> |
+					<% if current_user && current_user.admin? %>
+					<a href="equipments/<%= equipment.id %>" data-method='Delete' data-confirm='Are you sure?'>Remove Equipment</a>
+					<% end %>
+				</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<%= render 'layouts/static_landing_page' %>
+<% end %>

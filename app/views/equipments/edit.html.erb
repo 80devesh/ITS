@@ -1,0 +1,44 @@
+<% content_for(:title, "Edit Equipment") %>
+
+<h1>Edit <%= @equipment.name %> Details</h1>
+
+<% if flash[:errors] %>
+	<% flash[:errors].each do |e| %>
+		<p><%= e %></p>
+	<% end %>
+<% end %>
+
+<form action="/equipments/<%= @equipment.id %>" method="post">
+	<input type="hidden" name="_method" value="patch">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<p>
+		<label>Name:</label>
+		<input type="text" name="equipment[name]" value="<%= @equipment.name %>">
+	</p>
+	<p>
+		<label>Number:</label>
+		<input type="number" name="equipment[e_number]" value="<%= @equipment.e_number %>">
+	</p>
+	<p>
+		<label>Model Number:</label>
+		<input type="text" name="equipment[m_number]" value="<%= @equipment.m_number %>">
+	</p>
+	<p>
+		<label>Make:</label>
+		<input type="number" name="equipment[make]" value="<%= @equipment.make %>">
+	</p>
+	<p>
+		<label>Lab location:</label>
+		<input type="text" name="equipment[lab_location]" value="<%= @equipment.lab_location %>">
+	</p>
+	<p>
+		<label>Installation Date:</label>
+		<input type="Date" name="equipment[date_of_installation]" value="<%= @equipment.date_of_installation %>">
+	</p>
+	<p>
+		<label>Status:</label>
+		<input type="text" name="equipment[current_status]" value="<%= @equipment.current_status %>">
+	</p>
+	<input type="submit" value="UPDATE">	
+</form>
+<%= link_to "Go back", equipments_path %>

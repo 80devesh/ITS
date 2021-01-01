@@ -1,0 +1,33 @@
+<% content_for(:title, "Equipment Info") %>
+
+<h1>This page contains details of <%= @equipment.name %></h1>
+	<p>
+		<label>Name:</label>
+		<%= @equipment.name %>
+	</p>
+	<p>
+		<label>Number:</label>
+		<%= @equipment.e_number %>
+	</p>
+	<p>
+		<label>Model Number:</label>
+		<%= @equipment.m_number %>
+	</p>
+	<p>
+		<label>Make:</label>
+		<%= @equipment.make %>
+	</p>
+	<p>
+		<label>Lab location:</label>
+		<%= @equipment.lab_location %>
+	</p>
+	<p>
+		<label>Installation Date:</label>
+		<%= @equipment.date_of_installation %>
+	</p>
+	<p>
+		<label>Status:</label>
+		<%= @equipment.current_status %>
+	</p>
+
+<%= link_to "Go back", equipments_path %>
