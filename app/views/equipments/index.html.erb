@@ -3,9 +3,9 @@
 <% if user_signed_in? %>
 
 	<h1>Listing <%= pluralize(@equipments.length, "equipment", plural: "equipments") %></h1>
-	<%= link_to "Add Equipment", new_equipment_path %>
+	<%= link_to "Add Equipment", new_equipment_path, class: "btn btn-primary"%>
 
-	<table>
+	<table class="table">
 		<thead>
 			<td>Equipment_Name</td>
 			<td>Equipment_Number</td>
@@ -21,7 +21,12 @@
 					<a href="equipments/<%= equipment.id %>">See Details</a> |
 					<a href="equipments/<%= equipment.id %>/edit">Edit Details</a> |
 					<% if current_user && current_user.admin? %>
-					<a href="equipments/<%= equipment.id %>" data-method='Delete' data-confirm='Are you sure?'>Remove Equipment</a>
+						<a href="equipments/<%= equipment.id %>" data-method='Delete' data-confirm='Are you sure?'>Remove Equipment</a> |
+						<% if equipment.approved==false %>
+							<a href="equipments/<%= equipment.id %>" data-method='Patch' data-confirm='Click OK to Approve?' class= "btn btn-success">Approve</a>
+							<% else %>
+							<a href="equipments/<%= equipment.id %>" data-method='Patch' data-confirm='Click OK to Dispprove?' class= "btn btn-danger">Disapprove</a>
+						<% end %>
 					<% end %>
 				</td>
 			</tr>

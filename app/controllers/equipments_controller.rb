@@ -33,11 +33,21 @@ class EquipmentsController < ApplicationController
 
 	def update
 		equipment = Equipment.find(params[:id])
+		if current_user.admin?
+			if equipment.approved == false
+			    equipment.update_attribute(:approved, 'True')
+				redirect_to "/equipments"
+			else
+				equipment.update_attribute(:approved, 'false')
+				redirect_to "/equipments"
+			end
+		else
 		if equipment.update(equipment_params)
 			redirect_to "/equipments"
 		else
 			flash[:errors]=equipment.errors.full_messages
 			redirect_to "/equipments/<%= @equipment.id %>/edit"
+		end
 		end
 	end
 
